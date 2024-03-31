@@ -4,8 +4,8 @@ import configparser
 import os
 
 
-def read_config(config_path: str='./config/development.conf') -> dict:
-    """ Extract configuration from a file
+def read_config(config_path: str = "./config/development.conf") -> dict:
+    """Extract configuration from a file
 
     Parameters
     ----------
@@ -22,17 +22,17 @@ def read_config(config_path: str='./config/development.conf') -> dict:
     config = config._sections
 
     # scraping
-    config['scraping']['years_range'] = (
-        [int(x) for x in config['scraping']['years_range'].split('-')])
-    config['scraping']['n_proc'] = int(config['scraping']['n_proc'])
+    config["scraping"]["years_range"] = [
+        int(x) for x in config["scraping"]["years_range"].split("-")
+    ]
+    config["scraping"]["n_proc"] = int(config["scraping"]["n_proc"])
 
-    config['features']['pca_n_components'] = int(config['features']
-                                                 ['pca_n_components'])
+    config["features"]["pca_n_components"] = int(config["features"]["pca_n_components"])
     return config
 
 
 def create_folder(folder: str):
-    """ Create folders to retrieve posters and thumbnails
+    """Create folders to retrieve posters and thumbnails
 
     Parameters
     ----------

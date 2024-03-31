@@ -1,155 +1,159 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!-- <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css" />
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css"/>
+
     <!-- <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script>
     <link rel="stylesheet"
-	  href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" />
+          href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"/>
     <link rel="stylesheet"
-	  href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/custom.css') }}" />    
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/milligram.css') }}" />
+          href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/custom.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/milligram.css') }}"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  </head>
-  <body>
+</head>
+<body>
 
-    <div class="container">
-      <div class="row" style="margin-bottom: 2em">
-	<h1>Explore movie posters</h1>
-      </div>
-      <div class="column" id="tsne">
-      </div>
-      <div class="row" style="margin-top: 3em">
-	<div class="column column">
-	  <div class="row">
-	    <h3>Poster:</h3>
-	  </div>
-	  <div class="row">
-	    <div class="img">
-	      <img id="poster-img" src="" />
-	    </div>
-	  </div>
-	</div>
-	
-	<div class="column column-66">
-	  <div class="row">
-	    <h3>Similar Posters: </h3>
-	  </div>
-	  <div class="row">
-	    <div class="column column-offset-2">
-	      <!-- <div class="row"> -->
-	      <!-- 	<h5 id="score1">1st closest poster:</h3> -->
-	      <!-- </div> -->
-	      <div class="row">
-		<div class="img1">
-		  <img id="poster-img1" src="", onclick=click_img(1) />
-		</div>
-	      </div>
-	    </div>
+<div class="container">
+    <div class="row" style="margin-bottom: 2em">
+        <h1>Explore movie posters</h1>
+    </div>
+    <div class="column" id="tsne">
+    </div>
+    <div class="row" style="margin-top: 3em">
+        <div class="column column">
+            <div class="row">
+                <h3>Poster:</h3>
+            </div>
+            <div class="row">
+                <div class="img">
+                    <img id="poster-img" src=""/>
+                </div>
+            </div>
+        </div>
 
-	    <div class="column column-offset-2">
-	      <!-- <div class="row"> -->
-	      <!-- 	<h5 id="score2">2nd closest poster:</h3> -->
-	      <!-- </div> -->
-	      <div class="row">
-		<div class="img2">
-		  <img id="poster-img2" src="", onclick=click_img(2) />
-		</div>
-	      </div>
-	    </div>
+        <div class="column column-66">
+            <div class="row">
+                <h3>Similar Posters: </h3>
+            </div>
+            <div class="row">
+                <div class="column column-offset-2">
+                    <!-- <div class="row"> -->
+                    <!-- 	<h5 id="score1">1st closest poster:</h3> -->
+                    <!-- </div> -->
+                    <div class="row">
+                        <div class="img1">
+                            <img id="poster-img1" src="" , onclick=click_img(1)/>
+                        </div>
+                    </div>
+                </div>
 
-	    <div class="column column-offset-2">
-	      <!-- <div class="row"> -->
-	      <!-- 	<h5 id="score3">3rd closest poster:</h3> -->
-	      <!-- </div> -->
-	      <div class="row">
-		<div class="img3">
-		  <img id="poster-img3" src="", onclick=click_img('3') />
-		</div>
-	      </div>
-	    </div>
-	  </div>
-	  
-	  <div class="row">
-	    <div class="column column-offset-2">
-	      <!-- <div class="row"> -->
-	      <!-- 	<h5 id="score4">1st closest poster:</h3> -->
-	      <!-- </div> -->
-	      <div class="row">
-		<div class="img4">
-		  <img id="poster-img4" src="", onclick=click_img(4) />
-		</div>
-	      </div>
-	    </div>
+                <div class="column column-offset-2">
+                    <!-- <div class="row"> -->
+                    <!-- 	<h5 id="score2">2nd closest poster:</h3> -->
+                    <!-- </div> -->
+                    <div class="row">
+                        <div class="img2">
+                            <img id="poster-img2" src="" , onclick=click_img(2)/>
+                        </div>
+                    </div>
+                </div>
 
-	    <div class="column column-offset-2">
-	      <!-- <div class="row"> -->
-	      <!-- 	<h5 id="score5">2nd closest poster:</h3> -->
-	      <!-- </div> -->
-	      <div class="row">
-		<div class="img5">
-		  <img id="poster-img5" src="", onclick=click_img(5) />
-		</div>
-	      </div>
-	    </div>
+                <div class="column column-offset-2">
+                    <!-- <div class="row"> -->
+                    <!-- 	<h5 id="score3">3rd closest poster:</h3> -->
+                    <!-- </div> -->
+                    <div class="row">
+                        <div class="img3">
+                            <img id="poster-img3" src="" , onclick=click_img('3')/>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-	    <div class="column column-offset-2">
-	      <!-- <div class="row"> -->
-	      <!-- 	<h5 id="score6">6rd closest poster:</h3> -->
-	      <!-- </div> -->
-	      <div class="row">
-		<div class="img6">
-		  <img id="poster-img6" src="", onclick=click_img(6) />
-		</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-      </div>
+            <div class="row">
+                <div class="column column-offset-2">
+                    <!-- <div class="row"> -->
+                    <!-- 	<h5 id="score4">1st closest poster:</h3> -->
+                    <!-- </div> -->
+                    <div class="row">
+                        <div class="img4">
+                            <img id="poster-img4" src="" , onclick=click_img(4)/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column column-offset-2">
+                    <!-- <div class="row"> -->
+                    <!-- 	<h5 id="score5">2nd closest poster:</h3> -->
+                    <!-- </div> -->
+                    <div class="row">
+                        <div class="img5">
+                            <img id="poster-img5" src="" , onclick=click_img(5)/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column column-offset-2">
+                    <!-- <div class="row"> -->
+                    <!-- 	<h5 id="score6">6rd closest poster:</h3> -->
+                    <!-- </div> -->
+                    <div class="row">
+                        <div class="img6">
+                            <img id="poster-img6" src="" , onclick=click_img(6)/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row" style="margin-top: 6em">
-      <div class="column">
-	<h1>About</h1> ConvNet-Posters is a project that aims to use the power
-	of <a target="blank" href="http://cs231n.stanford.edu/">ConvNet</a> to cluster
-	similar movie posters.
-	<p>
+        <div class="column">
+            <h1>About</h1> ConvNet-Posters is a project that aims to use the power
+            of <a target="blank" href="http://cs231n.stanford.edu/">ConvNet</a> to cluster
+            similar movie posters.
+            <p>
 
-	</p>
-	<p>
-	  Scroll to zoom, and click on the thumbnails to select a poster. The 6th most
-	  ''similar'' movie posters will appear on the right side. You can now click on
-	  any of them to get its own ''similar'' movie posters.
-	</p>
+            </p>
+            <p>
+                Scroll to zoom, and click on the thumbnails to select a poster. The 6th most
+                ''similar'' movie posters will appear on the right side. You can now click on
+                any of them to get its own ''similar'' movie posters.
+            </p>
 
-	<p>
-	  
-	</p>
-	<p>
-	  For sake of readability (and computer safety), only 1,500 posters were randomly
-	  selected and plotted. To explore all the ~38,000 posters you need to use the
-	  <a href="/search">search engine</a>.
-	</p>
-      </div>
-      <div class="column">
-	<h1>Credit</h1>
-	<ul>
-	  <li>Posters are from: <a target="blank" href="http://www.impawards.com/">IMP Awards</a></li>
-	  <li>Pre-trained <a target="blank" href="https://arxiv.org/abs/1512.03385">ResNet50</a> weights for <a target="blank" href="https://github.com/fchollet/keras/tree/master/keras/applications">Keras</a></li>
-	</ul>
-<p>Designed by <a target="blank" href="http://github.com/aDrz">Adrien</a>
-	  (<a target="blank" href="https://github.com/aDrz/movie-posters-convnet">code source</a>). Licensed
-	  under the <a target="blank" href="https://mit-license.org/"
-		       title="MIT License">MIT License</a>.</p>
-	<p>
-	  If you want to know more about how it works check this [blog-post](http://iwoaf.com/finding-similar-movie-posters-with-convnet-deep-learning/).
-	</p>
-      </div>
+            <p>
+
+            </p>
+            <p>
+                For sake of readability (and computer safety), only 1,500 posters were randomly
+                selected and plotted. To explore all the ~4600 posters you need to use the
+                <a href="/search">search engine</a>.
+            </p>
+        </div>
+        <div class="column">
+            <h1>Credit</h1>
+            <ul>
+                <li>Posters are from: <a target="blank" href="http://www.impawards.com/">IMP Awards</a></li>
+                <li>Pre-trained <a target="blank" href="https://arxiv.org/abs/1512.03385">ResNet50</a> weights for <a
+                        target="blank" href="https://github.com/fchollet/keras/tree/master/keras/applications">Keras</a>
+                </li>
+            </ul>
+            <p>Designed by <a target="blank" href="https://github.com/aDrz">Adrien</a>
+                (<a target="blank" href="https://github.com/aDrz/movie-posters-convnet">code source</a>). Licensed
+                under the <a target="blank" href="https://mit-license.org/"
+                             title="MIT License">MIT License</a>.</p>
+            <p>
+                Updated to 2024 (Python 3.12) by <a target="blank" href="https://github.com/Niweera">Nipuna
+                Weerasekara</a>.
+            </p>
+        </div>
     </div>
     <div class="modal"></div>
-  </body>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/vars.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/plot3.js') }}"></script>
+</div>
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='js/vars.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/plot3.js') }}"></script>
 </html>

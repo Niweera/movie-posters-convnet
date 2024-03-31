@@ -77,9 +77,9 @@ After cloning you can just launch the bash script that will:
 * compute the datavisualization features
 
 ```sh
-$ python src/get_posters.py -c config/development.conf
-$ python src/get_get_features_from_cnn.py -c config/development.conf
-$ python src/get_data_visu.py -c config/development.conf
+$ python3 src/get_posters.py -c config/development.conf
+$ python3 src/get_features_from_cnn.py -c config/development.conf
+$ python3 src/get_data_visu.py -c config/development.conf
 ```
 
 Then grab a coffee...
@@ -87,17 +87,17 @@ Then grab a coffee...
 ## Visualization
 ```sh
 $ source env/bin/activate
-$ configapi=./config/development.conf
-$ python app.py
+$ export configapi=./config/development.conf
+$ python3 app.py
 ```
 
 Then launch index.html into your favorite browser:
 ```sh
-$ chromium 127.0.0.1:5000/index.html
+$ chromium 127.0.0.1:8080/index.html
 ```
 or 
 ```sh
-$ chromium 127.0.0.1:5000/index_complete.html
+$ chromium 127.0.0.1:8080/index_complete.html
 ```
 
 
