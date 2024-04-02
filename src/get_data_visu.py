@@ -41,6 +41,7 @@ def get_pca_features(data: list, n_components: int) -> np.array:
     features = np.array([x.features for x in data])
     pca = PCA(n_components=n_components, whiten=True)
     X = pca.fit_transform(features)
+    print(f"Explained variance: {pca.explained_variance_ratio_.sum()}")
     return X
 
 
@@ -50,30 +51,37 @@ def get_closest_features(data: list, db, config):
     """Compute PCA and use cosine_similarity to compute "distance"
     between each posters
     """
+    print("Computing closest features")
     X = get_pca_features(data, config["features"]["pca_n_components"])
 
     # Could become HUGE !
     # Don't forget that cosine_similarity will compute a NxN matrix
     # with N as the number of posters
+    print("Computing cosine similarity")
     X_cosine = cosine_similarity(X)
 
     # Diagonal values of X_cosine are 1s (a poster is of course identical to itself)
     # As we are looking for the closest posters except itself, we set the diagonal values to 0s
+    print("Setting diagonal values to 0")
     np.fill_diagonal(X_cosine, 0)
 
     # The largest the cosine similarity, the closest the features are
     idx_bests = np.argsort(X_cosine)
     idx_bests = idx_bests[:, ::-1]
     idx_keep = idx_bests[:, 0:6]
+    print("Closest features computed")
 
     # Push the data to db
+    print("Pushing data to db")
     for d, idxs in zip(data, idx_keep):
         ids = [data[j].id for j in idxs]
         d.closest_posters = ",".join(map(str, ids))
         # x = db.query(Poster).filter_by(id=d.id).first()
         # x.closest_posters = closest_posters
 
+    print("Committing to db")
     db.commit()
+    print("Committed to db")
     return True
 
 
@@ -83,14 +91,19 @@ def get_2d_features(data, db, config):
     """
     import umap
 
+    print("Computing 2D features")
     features = np.array([x.features for x in data])
+    print(f"Features shape: {features.shape}")
     embedding = umap.UMAP(
         n_neighbors=30, min_dist=0.3, n_components=500, metric="cosine"
     ).fit_transform(features)
+    print(f"2D features computed: {embedding.shape}")
     embedding = np.array(scale_coords(embedding, width=1024, height=500))
+    print("2D features scaled")
     for d, f in zip(data, embedding):
         d.features_pca = f
     db.commit()
+    print("2D features committed to db")
     return True
 
 
@@ -107,7 +120,9 @@ def main(argv):
 
     db = db_manager.get_db(config["general"]["db_uri"])
 
+    print("Getting data from db")
     data = db.query(Poster).all()
+    print(f"Data length: {len(data)}")
 
     _ = get_2d_features(data, db, config)
     _ = get_closest_features(data, db, config)

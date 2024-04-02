@@ -66,6 +66,7 @@ $ psql -U postgres -c "createuser movieposters;"
 $ psql -U postgres -c "createdb movieposters;"
 $ psql -U postgres -c "alter user movieposters with encrypted password 'yourpassword';"
 $ psql -U postgres -c "grant all privileges on database movieposters to movieposters ;"
+PGPASSWORD=yourpassword nohup pg_dump -U movieposters -d moviepostersv2 -f db_dump_hope.sql > pg_dump.log 2>&1 &
 ```
 
 # Usage
